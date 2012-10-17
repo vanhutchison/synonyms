@@ -1,0 +1,16 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %title Synonyms
+  %body
+    %div
+      %a{href: "/words"}
+        Words
+      |
+      %a{href: "/stop-words"}
+        Excluded Words
+      |
+      %a{href: "/synonyms/download"}
+        Download File
+    = yield

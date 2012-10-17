@@ -1,0 +1,50 @@
+%a{href: '/words'}
+  back to words
+
+%h1
+  Word:
+  = word['word']
+%ul
+  %li
+    created: 
+    = word['created_at']
+  %li
+    modified:
+    = word['modified_at']
+
+
+%form{action: "/word/#{word['id']}/status" , method: 'post'}
+  %input{type: 'checkbox', value: 1 , name: "reviewed"} 
+  Reviewed
+  %input{type: 'checkbox', value: 1 , name: "exclude"} 
+  Exclude
+  %input{type: 'submit',value: 'Update Status'}
+
+
+%form{action: "/word/#{word['id']}/delete"}
+  %input{type: 'submit',value: 'delete word'}
+
+%h2
+  Synonyms
+%form{action:"/word/#{word['id']}/synonyms" , method: 'post'}
+
+  %p
+    synonyms are only one word or hyphenated words
+  %textarea{rows: 10, cols: 40, name: 'synonyms'}
+    = synonyms['synonyms'] if synonyms
+  %br
+  %input{type: 'submit' , value: 'update'}
+
+
+%h2
+  Found In 
+  = pluralize( questions.count, 'Question')
+
+%ul
+  - questions.each do |q|
+    %li
+      = highlight(q['question'],word['word'])
+
+
+%a{href: '/words'}
+  back to words

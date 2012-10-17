@@ -1,0 +1,18 @@
+%h1
+  Excluded Words
+%p
+  These words are excluded when processing new questions
+  
+%form{action: "/stop-words" , method: 'post'}
+  %input{type: 'text' , name: 'word'}
+  %input{type: 'submit', value: 'add'}
+
+%ul
+  - words.each do |word|
+    %li
+      %span{style: 'font-size: 20px'}
+        = word['word']
+      [
+      %a{href: "/stop-words/#{word['id']}/delete" }
+        X
+      ]

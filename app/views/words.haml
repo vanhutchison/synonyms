@@ -1,0 +1,39 @@
+%h1
+  Words
+%div
+  -if path != '/words'
+    %a{href: '/words/A'}
+      All
+  -else
+    %span.selected
+      All
+  |
+  -if path != '/words/synonyms'
+    %a{href: '/words/synonyms/A'}
+      With Synonyms
+  -else
+    %span.selected
+      With Synonyms
+  |
+  -if path != '/words/nosynonyms'
+    %a{href: '/words/nosynonyms/A'}
+      Without Synonyms
+  -else
+    %span.selected
+      Without Synonyms
+%div
+  - ('A'..'Z').to_a.unshift('0').each_with_index do |letter,index|
+    -if index != 0
+      = " - "
+
+    -if params[:letter] == letter
+      %span.selected
+        = letter
+    -else
+      %a{href: "#{path}/#{letter}"} 
+        = letter
+%ul
+  - words.each do |word|
+    %li
+      %a{href: "/word/#{word['id']}" }
+        = word['word']
